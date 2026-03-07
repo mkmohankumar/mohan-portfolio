@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohan Kumar | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.1);
+      --text: #e8ecf8;
+      --muted: #aeb7d1;
+      --line: rgba(255,255,255,0.12);
+      --accent: #6d8cff;
+      --accent-2: #7c4dff;
+      --success: #7ee0b5;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(109,140,255,0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(124,77,255,0.16), transparent 35%),
+        linear-gradient(180deg, #09101f 0%, #0f1730 45%, #0b1020 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(8, 12, 24, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--muted);
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); transform: translateY(-1px); }
+
+    .hero {
+      padding: 72px 0 32px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(109,140,255,0.2), rgba(124,77,255,0.12)),
+        rgba(255,255,255,0.05);
+      box-shadow: var(--shadow);
+      padding: 46px;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(30px);
+      opacity: 0.45;
+    }
+
+    .hero-card::before {
+      width: 220px;
+      height: 220px;
+      background: rgba(109,140,255,0.45);
+      top: -70px;
+      right: -40px;
+    }
+
+    .hero-card::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(124,77,255,0.38);
+      bottom: -60px;
+      left: -30px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .headline {
+      margin: 14px 0 0;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: #d7dff9;
+      font-weight: 600;
+    }
+
+    .hero-copy {
+      margin: 20px 0 28px;
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 1.02rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 30px rgba(109, 140, 255, 0.35);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .mini-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .mini-value {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 36px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtext {
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .fact {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .skills-grid,
+    .tools-grid,
+    .process-grid,
+    .cert-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: #dfe6ff;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .case-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .case-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .case-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(109,140,255,0.08), transparent 35%, rgba(124,77,255,0.08));
+      pointer-events: none;
+    }
+
+    .case-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .case-tag {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: #dfe6ff;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .case-summary {
+      position: relative;
+      z-index: 1;
+      color: #dbe3ff;
+      font-size: 1rem;
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    .case-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .case-block {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .case-block strong {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .contact {
+      margin-bottom: 56px;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .contact-box,
+      .skills-grid,
+      .tools-grid,
+      .process-grid,
+      .cert-grid,
+      .case-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card { padding: 28px; }
+      .nav { align-items: start; }
+      .nav-links { gap: 12px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(calc(100% - 20px), var(--max)); }
+      .hero { padding-top: 34px; }
+      .hero-card { border-radius: 24px; }
+      .quick-facts { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; align-items: start; }
+      .btn { width: 100%; }
+      .cta-row { flex-direction: column; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container nav">
+      <a href="#top" class="brand">Mohan Kumar<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#tools">Tools</a>
+        <a href="#process">BA Process</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card reveal visible">
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">Senior Business Analyst Portfolio</div>
+              <h1>Mohan Kumar</h1>
+              <p class="headline">Business Analyst | Fintech & Digital Banking | Retail &amp; Corporate Banking</p>
+              <p class="hero-copy">
+                Experienced Business Analyst in Fintech, specializing in Digital Banking solutions within the Retail and Corporate Banking domain, with a focus on Onboarding, Payments, and Cards. Expertise in corporate banking, working closely with APAC and MEA regions to enhance user experience and operational efficiency.
+              </p>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="#case-studies">View Case Studies</a>
+                <a class="btn btn-secondary" href="#contact">Contact Me</a>
+              </div>
+            </div>
+            <div class="hero-side">
+              <div class="mini-card">
+                <div class="mini-label">Primary Focus</div>
+                <div class="mini-value">Business Analysis · Digital Banking · Fintech</div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-label">Core Domains</div>
+                <div class="mini-value">Retail Banking · Corporate Banking · Payments · Cards</div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-label">Key Strengths</div>
+                <div class="mini-value">Stakeholder Management · Gap Analysis · Agile Delivery</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">01 · About Me</div>
+            <h2>About Me</h2>
+          </div>
+          <p class="section-subtext">A concise professional summary positioned for recruiters, hiring managers, and consulting-led roles.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card reveal">
+            <div class="about-copy">
+              <p>Experienced Business Analyst in Fintech, specializing in Digital Banking solutions within the Retail and Corporate Banking domain, with a focus on Onboarding, Payments, and Cards. Expertise in corporate banking, working closely with APAC and MEA regions to enhance user experience and operational efficiency.</p>
+              <p>Proven ability to gather business requirements, conduct gap analysis, and deliver solutions using Agile methodologies. Adept at stakeholder management, process improvement, and driving customer satisfaction in fast-paced environments.</p>
+              <p><strong>Key Competencies:</strong></p>
+              <p>• Digital Banking Transformation (Retail &amp; Corporate)<br>
+              • Requirements Elicitation &amp; Functional Specification Documents (FSDs)<br>
+              • Corporate Onboarding &amp; Payments Solutions<br>
+              • Pre-Sales: RFP, Proposals, Product Demonstrations<br>
+              • Agile (Scrum, Kanban, Lean, XP) | JIRA | Confluence<br>
+              • Data Analysis: SQL, Tableau, Power BI<br>
+              • Stakeholder Management | Cross-functional Team Leadership<br>
+              • UAT, Post-Launch Evaluation &amp; Process Improvement</p>
+              <p><strong>Certifications:</strong> Certified Scrum Product Owner (CSPO) | IBM Data Science Specialization</p>
+            </div>
+          </div>
+          <div class="card reveal">
+            <h3>Professional Snapshot</h3>
+            <div class="quick-facts">
+              <div class="fact"><strong>Domain</strong><span>Fintech, banking, payments, and digital transformation</span></div>
+              <div class="fact"><strong>Delivery Style</strong><span>Structured, collaborative, and outcome-focused</span></div>
+              <div class="fact"><strong>Core Value</strong><span>Connecting business needs with scalable delivery</span></div>
+              <div class="fact"><strong>Working Model</strong><span>Cross-functional, stakeholder-heavy, Agile environments</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">02 · Skills</div>
+            <h2>Skills</h2>
+          </div>
+          <p class="section-subtext">Organized to show strategic business analysis strengths, domain depth, and execution capability.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="card reveal">
+            <h3>Business Analysis</h3>
+            <div class="pill-list">
+              <span class="pill">Requirements Gathering</span>
+              <span class="pill">Stakeholder Management</span>
+              <span class="pill">Functional Specifications</span>
+              <span class="pill">Gap Analysis</span>
+              <span class="pill">Process Mapping</span>
+              <span class="pill">UAT Support</span>
+            </div>
+          </div>
+          <div class="card reveal">
+            <h3>Fintech & Banking Domain</h3>
+            <div class="pill-list">
+              <span class="pill">Digital Banking</span>
+              <span class="pill">Payments</span>
+              <span class="pill">Cards</span>
+              <span class="pill">Customer Onboarding</span>
+              <span class="pill">Retail Banking</span>
+              <span class="pill">Corporate Banking</span>
+            </div>
+          </div>
+          <div class="card reveal">
+            <h3>Analytics & Insights</h3>
+            <div class="pill-list">
+              <span class="pill">SQL</span>
+              <span class="pill">Power BI</span>
+              <span class="pill">Tableau</span>
+              <span class="pill">Reporting Dashboards</span>
+              <span class="pill">Root Cause Analysis</span>
+              <span class="pill">MIS Reporting</span>
+            </div>
+          </div>
+          <div class="card reveal">
+            <h3>Delivery & Collaboration</h3>
+            <div class="pill-list">
+              <span class="pill">Agile</span>
+              <span class="pill">Scrum</span>
+              <span class="pill">JIRA</span>
+              <span class="pill">Confluence</span>
+              <span class="pill">Cross-functional Coordination</span>
+              <span class="pill">Pre-Sales Support</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case-studies">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">03 · Case Studies</div>
+            <h2>Case Studies</h2>
+          </div>
+          <p class="section-subtext">Structured like consulting engagements to highlight business problem-solving, delivery ownership, and impact.</p>
+        </div>
+
+        <div class="case-list">
+          <article class="case-card reveal">
+            <div class="case-top">
+              <div>
+                <div class="case-tag">Digital Banking Onboarding</div>
+                <h3>Digital Banking Onboarding Optimization</h3>
+              </div>
+            </div>
+            <p class="case-summary">Improved onboarding flow design for banking users by translating fragmented business requirements into a more structured and scalable journey.</p>
+            <div class="case-grid">
+              <div class="case-block"><strong>Problem</strong><div>Onboarding journeys were slowed by manual handoffs, fragmented workflows, and inconsistent coordination across internal teams.</div></div>
+              <div class="case-block"><strong>Analysis</strong><div>Mapped the current process, gathered stakeholder inputs, identified friction points, and documented operational bottlenecks affecting speed and experience.</div></div>
+              <div class="case-block"><strong>Decision / Approach</strong><div>Created clear functional requirements, aligned teams on standardized workflow stages, and supported Agile delivery of improved onboarding capabilities.</div></div>
+              <div class="case-block"><strong>Impact</strong><div>Helped streamline onboarding execution, improve internal visibility, and support a better customer journey across digital banking touchpoints.</div></div>
+            </div>
+          </article>
+
+          <article class="case-card reveal">
+            <div class="case-top">
+              <div>
+                <div class="case-tag">Payments Platform Implementation</div>
+                <h3>Payments Platform Implementation</h3>
+              </div>
+            </div>
+            <p class="case-summary">Supported implementation and stabilization of banking payment capabilities by connecting business requirements, platform constraints, and cross-functional execution.</p>
+            <div class="case-grid">
+              <div class="case-block"><strong>Problem</strong><div>Payment-related integrations required strong coordination across business, product, engineering, and banking stakeholders to reduce failures and delivery risk.</div></div>
+              <div class="case-block"><strong>Analysis</strong><div>Captured client and platform requirements, reviewed fitment gaps, monitored transaction issues, and investigated operational failure patterns.</div></div>
+              <div class="case-block"><strong>Decision / Approach</strong><div>Facilitated requirement clarification, incident prioritization, implementation support, and issue resolution workflows aligned to SLA-driven delivery.</div></div>
+              <div class="case-block"><strong>Impact</strong><div>Strengthened implementation readiness, improved stakeholder confidence, and supported more reliable payment platform performance during critical periods.</div></div>
+            </div>
+          </article>
+
+          <article class="case-card reveal">
+            <div class="case-top">
+              <div>
+                <div class="case-tag">Banking Analytics Dashboard</div>
+                <h3>Banking Analytics Dashboard</h3>
+              </div>
+            </div>
+            <p class="case-summary">Converted scattered reporting needs into a structured analytics view that supported faster business decisions and clearer performance visibility.</p>
+            <div class="case-grid">
+              <div class="case-block"><strong>Problem</strong><div>Business teams lacked a consolidated view of sales and transaction performance, making trend analysis and decision-making slower than necessary.</div></div>
+              <div class="case-block"><strong>Analysis</strong><div>Worked with stakeholders to define critical metrics, identify reporting pain points, and structure data into decision-oriented views.</div></div>
+              <div class="case-block"><strong>Decision / Approach</strong><div>Designed dashboard logic and reporting layers using SQL and BI tools to improve visibility across banks, trends, and monthly performance.</div></div>
+              <div class="case-block"><strong>Impact</strong><div>Enabled clearer insight generation, improved reporting efficiency, and gave teams a stronger basis for business planning and review.</div></div>
+            </div>
+          </article>
+
+          <article class="case-card reveal">
+            <div class="case-top">
+              <div>
+                <div class="case-tag">Fintech Client Implementation</div>
+                <h3>Fintech Client Implementation & Pre-Sales Support</h3>
+              </div>
+            </div>
+            <p class="case-summary">Bridged client expectations and product capability by using requirement analysis, fitment assessment, and solution framing to support customized delivery.</p>
+            <div class="case-grid">
+              <div class="case-block"><strong>Problem</strong><div>Client opportunities required tailored solutioning, strong pre-bid clarity, and a realistic view of fitment between banking requirements and platform capabilities.</div></div>
+              <div class="case-block"><strong>Analysis</strong><div>Reviewed RFPs, analyzed client requirements, performed gap analysis, and assessed solution alignment with functional and compliance expectations.</div></div>
+              <div class="case-block"><strong>Decision / Approach</strong><div>Developed structured proposals, supported solution customization, and translated client needs into implementation-ready functional direction.</div></div>
+              <div class="case-block"><strong>Impact</strong><div>Improved pre-sales credibility, created stronger alignment between internal teams and client goals, and supported more confident project planning.</div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tools">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">04 · Tools & Technologies</div>
+            <h2>Tools & Technologies</h2>
+          </div>
+          <p class="section-subtext">A practical stack centered on delivery, analytics, and business process execution.</p>
+        </div>
+        <div class="tools-grid">
+          <div class="card reveal"><h3>Analytics</h3><p>SQL, Power BI, Tableau, reporting dashboards, performance analysis.</p></div>
+          <div class="card reveal"><h3>Project Delivery</h3><p>JIRA, Confluence, Agile workflows, sprint planning, backlog coordination.</p></div>
+          <div class="card reveal"><h3>Documentation</h3><p>Functional specifications, process maps, gap analysis, stakeholder-ready presentations.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">05 · Business Analysis Process</div>
+            <h2>Business Analysis Process</h2>
+          </div>
+          <p class="section-subtext">A disciplined workflow that connects business need, cross-functional execution, and measurable delivery.</p>
+        </div>
+        <div class="process-grid">
+          <div class="card reveal"><h3>01. Requirements Gathering</h3><p>Identify business goals, collect stakeholder inputs, and convert expectations into structured functional requirements.</p></div>
+          <div class="card reveal"><h3>02. Stakeholder Management</h3><p>Align business, product, engineering, and operations teams through clear communication and decision support.</p></div>
+          <div class="card reveal"><h3>03. Process Mapping</h3><p>Break down current-state and future-state workflows to reveal inefficiencies, dependencies, and improvement opportunities.</p></div>
+          <div class="card reveal"><h3>04. Gap Analysis</h3><p>Evaluate business requirements against platform capabilities to identify customization needs, risks, and constraints.</p></div>
+          <div class="card reveal"><h3>05. Agile Delivery</h3><p>Support sprint planning, requirement clarification, and iterative delivery to keep teams aligned on execution priorities.</p></div>
+          <div class="card reveal"><h3>06. UAT & Post-Implementation Review</h3><p>Validate delivered functionality, capture feedback, and assess adoption, performance, and improvement areas after launch.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">06 · Certifications</div>
+            <h2>Certifications</h2>
+          </div>
+          <p class="section-subtext">Selected credentials supporting product thinking, analytics, and structured delivery.</p>
+        </div>
+        <div class="cert-grid">
+          <div class="card reveal"><h3>Certified Scrum Product Owner</h3><p>Supports Agile delivery, backlog prioritization, and stakeholder-centered product collaboration.</p></div>
+          <div class="card reveal"><h3>IBM Data Science Specialization</h3><p>Strengthens analytical thinking, data interpretation, and dashboard-driven decision support.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Contact</div>
+            <h2>Let’s Connect</h2>
+          </div>
+          <p class="section-subtext">Built for recruiter review and direct outreach.</p>
+        </div>
+        <div class="contact-box">
+          <div class="card reveal">
+            <h3>Open to relevant Business Analysis and Implementation opportunities</h3>
+            <p>For roles aligned with fintech, banking transformation, payments, digital onboarding, and implementation consulting, reach out through the channels below.</p>
+            <div class="contact-list">
+              <div class="contact-item">Email: mk.mohankumar@outlook.com</div>
+              <div class="contact-item">Phone: +91 9108667700</div>
+              <div class="contact-item">Location: Bengaluru, India</div>
+              <div class="contact-item">LinkedIn: linkedin.com/in/mohan-kumar-9782b8190</div>
+            </div>
+          </div>
+          <div class="card reveal">
+            <h3>Placeholder Data</h3>
+            <p>You can replace or map these fields in your portfolio builder:</p>
+            <div class="pill-list">
+              <span class="pill">{{skills}}</span>
+              <span class="pill">{{experience}}</span>
+              <span class="pill">{{projects}}</span>
+              <span class="pill">{{certifications}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© <span id="year"></span> Mohan Kumar · Senior Business Analyst Portfolio</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      if (!el.classList.contains('visible')) {
+        el.style.transitionDelay = Math.min(index * 60, 240) + 'ms';
+      }
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
